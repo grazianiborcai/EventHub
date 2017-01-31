@@ -1,1 +1,1 @@
-include ':app', ':eventhub'
+include ':eventhub', ':sample'
