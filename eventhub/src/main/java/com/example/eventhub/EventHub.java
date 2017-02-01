@@ -1,7 +1,9 @@
 package com.example.eventhub;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Base64;
 import android.widget.Toast;
 
@@ -21,7 +23,7 @@ import javax.crypto.spec.SecretKeySpec;
  * Created by 01547598 on 1/26/2017.
  */
 
-public class EventHub extends AsyncTask<String, Void, Void> {
+public class EventHub extends AsyncTask<String, Void, Intent> {
 
     /**
      * HTTPS constants
@@ -32,6 +34,7 @@ public class EventHub extends AsyncTask<String, Void, Void> {
     private static final String AUTHORIZATION = "Authorization";
     private static final String CONTENT = "Content-Type";
     private static final String JSON = "application/json";
+    public static final String HTTP_CODE = "HttpCode";
 
     /**
      * JSON constants
@@ -48,13 +51,15 @@ public class EventHub extends AsyncTask<String, Void, Void> {
     private String mHubSasKeyValue; //"iXwYAtBfEwW1vf7vr9O9GAoMaoKHjOkeJL3bXDfPSkA=" "1Yqc2kkuVAabR0eRGOO5Via2lArYAXkkRr78MdvMySY="
 
 
-    private Context context;
+
     public final static List<EventHub> nAsyncTasks = new ArrayList<EventHub>();
 
     private int responseCode;
 
-    public EventHub(Context c) {
-        this.context = c;
+    protected OnTaskFinished mCallbacks;
+
+    public EventHub(OnTaskFinished o) {
+        this.mCallbacks = o;
     }
 
     public EventHub setmNameSpace(String mNameSpace) {
@@ -104,7 +109,8 @@ public class EventHub extends AsyncTask<String, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(String... params) {
+    protected Intent doInBackground(String... params) {
+        Bundle data = new Bundle();
         try {
             String mURL = HTTPS + mNameSpace + SERVER + mEventHub +MESSAGES;
             String mUrlToken = HTTPS + mNameSpace + SERVER;
@@ -125,21 +131,25 @@ public class EventHub extends AsyncTask<String, Void, Void> {
             writer.close();
 
             responseCode = urlConnection.getResponseCode();
+            data.putInt(HTTP_CODE, responseCode);
         } catch (Exception e) {
             e.printStackTrace();
             //Toast.makeText(context, "Exception", Toast.LENGTH_LONG).show();
         }
 
-        return null;
+        final Intent intent = new Intent();
+        intent.putExtras(data);
+        return intent;
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(Intent intent) {
+        super.onPostExecute(intent);
+        mCallbacks.postExecute(intent);
         if (responseCode == HttpURLConnection.HTTP_CREATED) { // success
             //Toast.makeText(context, jsonParam.toString(), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, "Something wrong with Internet connection", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(context, "Something wrong with Internet connection", Toast.LENGTH_SHORT).show();
         }
         EventHub.nAsyncTasks.remove(this);
     }
