@@ -7,7 +7,7 @@ version = "1.0.1"
 ext {
     PUBLISH_GROUP_ID = 'com.eventhub'
     PUBLISH_ARTIFACT_ID = 'eventhub-library'
-    PUBLISH_VERSION = '1.0.0'
+    PUBLISH_VERSION = '1.0.2'
 }
 
 android {
@@ -17,8 +17,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -108,6 +108,7 @@ bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
     configurations = ['archives']
+    override = true
     pkg {
         repo = "Maven"
         name = "eventhub"
@@ -116,5 +117,9 @@ bintray {
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
         publish = true
+        version {
+            name = "1.0.2"
+            released = new Date()
+        }
     }
 }
