@@ -1,6 +1,7 @@
 package com.example.a01547598.datastream;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.eventhub.EventHub;
+import com.example.eventhub.OnTaskFinished;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,7 +43,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
  * Created by 01547598 on 1/26/2017.
  */
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements OnTaskFinished{
 
     public static final int RequestPermissionCode = 1;
 
@@ -158,7 +160,7 @@ public class MainFragment extends Fragment {
                             jsonParam.put("time", now);
                             jsonParam.put("value", amp);
 
-                            new EventHub(getContext())
+                            new EventHub(MainFragment.this)
                                     .setmNameSpace(NAMESPACE)
                                     .setmEventHub(EVENTHUB)
                                     .setmHubSasKeyName(HUBSASKEYNAME)
@@ -329,4 +331,8 @@ public class MainFragment extends Fragment {
         super.onDestroyView();
     }
 
+    @Override
+    public void postExecute(Intent intent) {
+
+    }
 }
