@@ -16,9 +16,6 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven {
-            url  "http://grazianiborcai.bintray.com/Maven"
-        }
     }
 }
 
