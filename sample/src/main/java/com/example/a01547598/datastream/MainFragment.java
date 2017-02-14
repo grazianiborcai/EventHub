@@ -29,6 +29,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -333,6 +334,11 @@ public class MainFragment extends Fragment implements OnTaskFinished{
 
     @Override
     public void postExecute(Intent intent) {
-
+        int responseCode = intent.getIntExtra(EventHub.HTTP_CODE, 0);
+        if (responseCode == HttpURLConnection.HTTP_CREATED) { // success
+            //Toast.makeText(context, jsonParam.toString(), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "Something wrong with Internet connection", Toast.LENGTH_SHORT).show();
+        }
     }
 }
