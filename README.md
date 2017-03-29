@@ -19,7 +19,7 @@ The vast majority of Event Hub applications using this and other client librarie
 With your Android application referencing this Android library, which is quite simple in a Maven build as we explain in the guide, you'll need to import the com.example.eventhub package with the EventHub class.
 
 
-    import com.microsoft.azure.eventhubs.*;
+    import com.example.eventhub.*;
     
 Using an Event Hub connection string, which holds all required connection information, including an authorization key or token, you then create an EventHubClient instance, which manages a secure AMQP 1.0 connection to the Event Hub.
 
