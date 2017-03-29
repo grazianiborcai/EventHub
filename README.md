@@ -11,13 +11,23 @@ This Android library for Azure Event Hubs allows sending events to an Azure Even
 
 ## Using the library
 
+You need only add in your application gradle the following code:
+
+    repositories {
+        maven {
+            url  "http://grazianiborcai.bintray.com/Maven"
+        }
+    }
+    
+And in your module gradle the following code:
+    
+    compile 'grazianiborcai:eventhub:1.0.0'
 
 ## Publishing Events
 
 The vast majority of Event Hub applications using this and other client libraries are and will be event publishers. And for most of these publishers, publishing events is extremely simple.
 
 With your Android application referencing this Android library, which is quite simple in a Maven build as we explain in the guide, you'll need to import the com.example.eventhub package with the EventHub class.
-
 
     import com.example.eventhub.*;
     
