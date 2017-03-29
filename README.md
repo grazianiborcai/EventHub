@@ -38,7 +38,21 @@ Using an Event Hub connection string, which holds all required connection inform
     final String sasKeyName = "-----SharedAccessSignatureKeyName-----";
     final String sasKey = "---SharedAccessSignatureKey----";
 
-Now it is only necessary to create an AsyncTask EventHub and send your String message. You need to inform your Activity Context which can be "this" or "getContext()" if you are using a Fragment class.
+Now it is only necessary to create an AsyncTask EventHub and send your String message but before that, you need to implement the Interface OnTaskFinished.
+
+    public class MainFragment extends Fragment implements OnTaskFinished{
+    
+    @Override
+    public void postExecute(Intent intent) {
+        int responseCode = intent.getIntExtra(EventHub.HTTP_CODE, 0);
+        if (responseCode == HttpURLConnection.HTTP_CREATED) { // success
+            //Toast.makeText(context, jsonParam.toString(), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "Something wrong with Internet connection", Toast.LENGTH_SHORT).show();
+        }
+    }
+    
+Now it is only necessary to send your message using the following code:
     
     new EventHub(this)
             .setmNameSpace(namespaceName)
