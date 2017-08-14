@@ -48,11 +48,11 @@ public class MainFragment extends Fragment implements OnTaskFinished{
 
     public static final int RequestPermissionCode = 1;
 
-    private static final String NAMESPACE = "eventhubvtc-ns"; //eventhubvtc-ns
-    private static final String EVENTHUB = "eh-vtc-iao"; //eh-vtc-iao
-    private static final String HUBSASKEYNAME = "RootManageSharedAccessKey"; //"RootManageSharedAccessKey" "valepoc"
-    private static final String HUBSASKEYVALUE = "iXwYAtBfEwW1vf7vr9O9GAoMaoKHjOkeJL3bXDfPSkA="; //"iXwYAtBfEwW1vf7vr9O9GAoMaoKHjOkeJL3bXDfPSkA=" "1Yqc2kkuVAabR0eRGOO5Via2lArYAXkkRr78MdvMySY="
-
+    private static final String NAMESPACE = "YOUR-NAME-SPACE";
+    private static final String EVENTHUB = "YOUR-EVENT-HUB";
+    private static final String HUBSASKEYNAME = "YOUR-KEY-NAME";
+    private static final String HUBSASKEYVALUE = "YOUR-KEY-VALUE";
+    
     private static final String AUDIO = "audio";
 
     private TextView textView;
