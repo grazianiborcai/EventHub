@@ -8,21 +8,6 @@ Azure Event Hubs is a highly scalable publish-subscribe service that can ingest 
 
 This Android library for Azure Event Hubs allows sending events to an Azure Event Hub. 
 
-
-## Using the library
-
-You need only add in your application gradle the following code:
-
-    repositories {
-        maven {
-            url  "http://grazianiborcai.bintray.com/Maven"
-        }
-    }
-    
-And in your module gradle the following code:
-    
-    compile 'grazianiborcai:eventhub:1.0.0'
-
 ## Publishing Events
 
 The vast majority of Event Hub applications using this and other client libraries are and will be event publishers. And for most of these publishers, publishing events is extremely simple.
